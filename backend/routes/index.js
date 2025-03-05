@@ -14,7 +14,6 @@ router.get('/hello/world', function(req, res) {
   res.send('Hello World!');
 });
 
-const express = require('express');
 const apiRouter = require('./api');
 
 // Add a XSRF-TOKEN cookie
