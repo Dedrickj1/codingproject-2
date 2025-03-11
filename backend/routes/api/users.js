@@ -40,6 +40,37 @@ router.post('/', async (req, res) => {
       // ... existing signup route handler
     }
   );
+
+  // Sign up
+router.post(
+    '/',
+    validateSignup,
+    async (req, res) => {
+      const { email, password, username, firstName, lastName } = req.body;
+      const hashedPassword = bcrypt.hashSync(password);
+      const user = await User.create({ 
+        email, 
+        username, 
+        hashedPassword,
+        firstName,
+        lastName
+      });
+  
+      const safeUser = {
+        id: user.id,
+        email: user.email,
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName
+      };
+  
+      await setTokenCookie(res, safeUser);
+  
+      return res.json({
+        user: safeUser
+      });
+    }
+  );
   
   // Hash the password
   const hashedPassword = bcrypt.hashSync(password);
