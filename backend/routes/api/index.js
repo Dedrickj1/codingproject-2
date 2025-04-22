@@ -1,4 +1,4 @@
-/ backend/routes/api/index.js
+//backend/routes/api/index.js
 const router = require('express').Router();
 
 // Test route to check if API router is working
