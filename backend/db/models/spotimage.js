@@ -1,13 +1,34 @@
-// backend/db/models/spotimage.js
-// Pseudocode for SpotImage model
-/*
-1. Import required modules
-2. Define SpotImage class extending Model
-3. Define static associate method:
-   - SpotImage belongs to Spot through spotId
-4. Initialize SpotImage with these fields and validations:
-   - spotId: Non-nullable integer
-   - url: Non-nullable string with validation for URL format
-   - preview: Boolean with default false
-5. Export SpotImage model
-*/
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  const SpotImage = sequelize.define('SpotImage', {
+    spotId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Spots',
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
+    },
+    url: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isUrl: {
+          msg: 'URL must be valid',
+        },
+      },
+    },
+    preview: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+  });
+
+  // Define associations
+  SpotImage.associate = function (models) {
+    SpotImage.belongsTo(models.Spot, { foreignKey: 'spotId' });
+  };
+
+  return SpotImage;
+};
