@@ -8,12 +8,44 @@ module.exports = (sequelize, DataTypes) => {
        type: DataTypes.STRING,
        allowNull: false,
      },
-     // other attributes...
+     state: {
+       type: DataTypes.STRING,
+       allowNull: false,
+     },
+     country: {
+       type: DataTypes.STRING,
+       allowNull: false,
+     },
+     lat: {
+       type: DataTypes.FLOAT,
+       allowNull: false,
+     },
+     lng: {
+       type: DataTypes.FLOAT,
+       allowNull: false,
+     },
+     name: {
+       type: DataTypes.STRING,
+       allowNull: false,
+     },
+     description: {
+       type: DataTypes.TEXT,
+       allowNull: false,
+     },
+     price: {
+       type: DataTypes.FLOAT,
+       allowNull: false,
+     },
+     ownerId: {
+       type: DataTypes.INTEGER,
+       allowNull: false,
+     }
    });
  
    Spot.associate = function(models) {
-     // Define associations here
+     // Define associations here, if necessary
    };
  
    return Spot;
  };
+ 
