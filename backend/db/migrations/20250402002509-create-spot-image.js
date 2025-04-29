@@ -1,15 +1,51 @@
-// backend/db/migrations/XXXXXXXXXXXXXX-create-spot-image.js
-// Pseudocode for migration file
-/*
-1. Set up options object for production environment
-2. Define up method:
-   - Create SpotImages table with these fields:
-     - id: Primary key, auto-increment, non-nullable integer
-     - spotId: Non-nullable integer, references Spots.id with cascade delete
-     - url: Non-nullable string
-     - preview: Non-nullable boolean with default false
-     - createdAt: Non-nullable date with CURRENT_TIMESTAMP default
-     - updatedAt: Non-nullable date with CURRENT_TIMESTAMP default
-3. Define down method:
-   - Drop SpotImages table
-*/
+'use strict';
+
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA; // for Postgres in production
+}
+
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('SpotImages', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      spotId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Spots',
+          key: 'id'
+        },
+        onDelete: 'CASCADE'
+      },
+      url: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      preview: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      }
+    }, options);
+  },
+
+  async down(queryInterface, Sequelize) {
+    options.tableName = 'SpotImages';
+    await queryInterface.dropTable(options);
+  }
+};

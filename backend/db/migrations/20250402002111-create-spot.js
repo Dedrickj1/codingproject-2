@@ -1,22 +1,76 @@
-// backend/db/migrations/XXXXXXXXXXXXXX-create-spot.js
-// Pseudocode for migration file
-/*
-1. Set up options object for production environment
-2. Define up method:
-   - Create Spots table with these fields:
-     - id: Primary key, auto-increment, non-nullable integer
-     - ownerId: Non-nullable integer, references Users.id with cascade delete
-     - address: Non-nullable string
-     - city: Non-nullable string
-     - state: Non-nullable string
-     - country: Non-nullable string
-     - lat: Non-nullable decimal(10,7)
-     - lng: Non-nullable decimal(10,7)
-     - name: Non-nullable string(50)
-     - description: Non-nullable text
-     - price: Non-nullable decimal(10,2)
-     - createdAt: Non-nullable date with CURRENT_TIMESTAMP default
-     - updatedAt: Non-nullable date with CURRENT_TIMESTAMP default
-3. Define down method:
-   - Drop Spots table
-*/
+'use strict';
+
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    // Create the 'Spots' table
+    await queryInterface.createTable('Spots', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      address: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      city: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      state: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      country: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      lat: {
+        type: Sequelize.FLOAT,
+        allowNull: false
+      },
+      lng: {
+        type: Sequelize.FLOAT,
+        allowNull: false
+      },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: false
+      },
+      price: {
+        type: Sequelize.FLOAT,
+        allowNull: false
+      },
+      ownerId: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      }
+    });
+  },
+
+  async down(queryInterface, Sequelize) {
+    options.tableName = "Spots";
+    
+    return queryInterface.dropTable(options); 
+  }
+};
