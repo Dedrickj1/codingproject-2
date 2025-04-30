@@ -14,13 +14,14 @@ router.get('/hello/world', function(req, res) {
   res.send('Hello World!');
 });
 
+
+router.get('/', (req, res) => {
+  res.send('API is running');
+});
+
 const apiRouter = require('./api');
 
 // Connect the API router
 router.use('/api', apiRouter);
-
-
-
-
 
 module.exports = router;
