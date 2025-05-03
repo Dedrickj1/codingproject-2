@@ -1,18 +1,22 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+// backend/routes/api/users.js
+// ...
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+// ...
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 
 const router = express.Router();
 
-// Sign up
-router.post('/', async (req, res) => {
-  const { email, password, username } = req.body;
+// backend/routes/api/users.js
+// ...
 
-  const validateSignup = [
+// backend/routes/api/users.js
+// ...
+const validateSignup = [
     check('email')
       .exists({ checkFalsy: true })
       .isEmail()
@@ -28,70 +32,42 @@ router.post('/', async (req, res) => {
     check('password')
       .exists({ checkFalsy: true })
       .isLength({ min: 6 })
-      .withMessage('Password must be 6 characters or more.'),
+      .withMessage('Password must be 6 characters or more.'),    
+      check('firstName')
+      .exists({checkFalsy: true})
+      .withMessage('First name is required.'),
+    check('lastName')
+      .exists({checkFalsy: true})
+      .withMessage('Last name is required.'),
     handleValidationErrors
   ];
-  
-  // Sign up
-  router.post(
-    '/',
-    validateSignup,
-    async (req, res) => {
-      // ... existing signup route handler
-    }
-  );
 
-  // Sign up
+
+// Sign up
 router.post(
     '/',
     validateSignup,
     async (req, res) => {
-      const { email, password, username, firstName, lastName } = req.body;
+      const { firstName, lastName, email, password, username } = req.body;
       const hashedPassword = bcrypt.hashSync(password);
-      const user = await User.create({ 
-        email, 
-        username, 
-        hashedPassword,
-        firstName,
-        lastName
-      });
+      const user = await User.create({ firstName, lastName, email, username, hashedPassword });
   
       const safeUser = {
         id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         username: user.username,
-        firstName: user.firstName,
-        lastName: user.lastName
       };
   
       await setTokenCookie(res, safeUser);
   
-      return res.json({
+      res.status(201)
+      return res.json({ 
         user: safeUser
       });
     }
   );
-  
-  // Hash the password
-  const hashedPassword = bcrypt.hashSync(password);
-  
-  // Create a new user
-  const user = await User.create({ email, username, hashedPassword });
 
-  // Create a safe user object (without hashedPassword)
-  const safeUser = {
-    id: user.id,
-    email: user.email,
-    username: user.username,
-  };
-
-  // Set the JWT cookie
-  await setTokenCookie(res, safeUser);
-
-  // Return the user information
-  return res.json({
-    user: safeUser
-  });
-});
 
 module.exports = router;

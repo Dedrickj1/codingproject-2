@@ -6,6 +6,24 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
       // define association here
+      User.hasMany(models.Spot, {
+        foreignKey: "ownerId",
+        onDelete: "CASCADE",
+        as: 'Owner',
+        hooks: true
+      })
+
+      User.hasMany(models.Review, {
+        foreignKey: "userId",
+        onDelete: "CASCADE",
+        hooks: true
+      })
+      
+      User.hasMany(models.Booking, {
+        foreignKey: "userId",
+        onDelete: "CASCADE",
+        hooks: true
+      })
     }
   }
 
@@ -17,6 +35,30 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
         validate: {
           len: [4, 30],
+          isNotEmail(value) {
+            if (Validator.isEmail(value)) {
+              throw new Error('Cannot be an email.');
+            }
+          },
+        },
+      },
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [2, 30],
+          isNotEmail(value) {
+            if (Validator.isEmail(value)) {
+              throw new Error('Cannot be an email.');
+            }
+          },
+        },
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [2, 30],
           isNotEmail(value) {
             if (Validator.isEmail(value)) {
               throw new Error('Cannot be an email.');
@@ -40,21 +82,13 @@ module.exports = (sequelize, DataTypes) => {
           len: [60, 60],
         },
       },
-      firstName: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      lastName: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
     },
     {
       sequelize,
       modelName: 'User',
       defaultScope: {
         attributes: {
-          exclude: ['hashedPassword', 'createdAt', 'updatedAt'],
+          exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt'],
         },
       },
     }

@@ -1,11 +1,12 @@
 'use strict';
 
-/** @type {import('sequelize-cli').Migration} */
-
-let options = {};
-if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA; 
-}
+let options = {
+  // schema: 'retreat',
+   //tableName: 'Users'
+ };
+ if (process.env.NODE_ENV === 'production') {
+   options.schema = process.env.SCHEMA;  // define your schema in options object
+ }
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -25,16 +26,9 @@ module.exports = {
         },
         onDelete: 'CASCADE'
       },
-      name: {
-        type: Sequelize.STRING(100),
-        allowNull: false
-      },
-      description: {
-        type: Sequelize.TEXT,
-        allowNull: false
-      },
       address: {
         type: Sequelize.STRING,
+        unique: true,
         allowNull: false
       },
       city: {
@@ -57,6 +51,18 @@ module.exports = {
         type: Sequelize.DECIMAL,
         allowNull: false
       },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: false
+      },
+      price: {
+        type: Sequelize.DECIMAL,
+        allowNull: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -69,9 +75,8 @@ module.exports = {
       }
     }, options);
   },
-
   async down(queryInterface, Sequelize) {
-    options.tableName = 'Spots';
-    return queryInterface.dropTable(options);
+    options.tableName = "Spots";
+    await queryInterface.dropTable(options);
   }
 };
