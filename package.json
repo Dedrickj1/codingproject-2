@@ -1,23 +1,31 @@
 {
-  "name": "retreat-clone",
+  "name": "coding-project",
   "version": "1.0.0",
-  "description": "## Database Schema Design",
+  "description": "first example",
   "main": "index.js",
+  "dependencies": {
+    "cross-spawn": "^7.0.6",
+    "dotenv": "^16.5.0",
+    "dotenv-cli": "^8.0.0",
+    "dotenv-expand": "^10.0.0",
+    "isexe": "^2.0.0",
+    "minimist": "^1.2.8",
+    "path-key": "^3.1.1",
+    "shebang-command": "^2.0.0",
+    "shebang-regex": "^3.0.0",
+    "which": "^2.0.2"
+  },
+  "devDependencies": {},
   "scripts": {
-    "install": "npm --prefix backend install backend",
+   "install": "npm --prefix backend install backend",
     "dev:backend": "npm install --prefix backend start",
     "sequelize": "npm run --prefix backend sequelize",
     "sequelize-cli": "npm run --prefix backend sequelize-cli",
     "start": "npm start --prefix backend",
     "build": "npm run --prefix backend build"
   },
+
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "dotenv": "^16.4.5"
-  },
-  "devDependencies": {
-    "dotenv-cli": "^8.0.0"
-  }
+  "license": "ISC"
 }
