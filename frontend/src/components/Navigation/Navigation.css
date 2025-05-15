@@ -1,0 +1,33 @@
+.hidden{
+    display: none;
+}
+
+.show-menu{
+    position: absolute;
+}
+/*
+ul {
+    list-style-type: none;
+  }
+
+  ul li {
+    display: inline;
+    margin-right: 10px;
+  } */
+   
+
+  /* .profile-dropdown {
+    position: absolute;
+    background-color: whitesmoke;
+    padding: 5px;
+
+  } */
+
+  .profile-dropdown.hidden {
+    display: none;
+  }
+
+  .modal-link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }

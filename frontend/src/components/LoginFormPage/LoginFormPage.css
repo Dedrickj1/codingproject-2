@@ -1,0 +1,43 @@
+#modal-content {
+    background-color:#f2f1ef;
+    color: black;
+    padding: 20px;
+    border-radius: 8px;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: transparent;
+    border-radius: 10px;
+  }
+
+  label {
+   margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  label input {
+    margin-top: 5px;
+    /* Add margin to the top of the input for more space between label and input */
+  }
+
+
+  ul {
+    color: #E62539;
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .error {
+    color: #E62539;
+    margin-top: 5px;
+  }

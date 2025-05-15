@@ -1,0 +1,46 @@
+.menu-button:hover {
+    color: #333333;
+}
+
+
+
+  .profile-dropdown {
+    position: absolute;
+    right: 0;
+    top: 60px;
+    background-color: #032837;
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+    padding: 10px;
+    list-style-type: none;
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-dropdown li {
+    padding: 4px 12px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #027373;
+    display: block;
+    width: 200px;
+  }
+
+
+  .profile-dropdown.hidden {
+    display: none;
+  }
+
+  .profile-dropdown a {
+    color: whitesmoke;
+    text-decoration: none;
+  }
+
+
+  .profile-dropdown a[href="/spots/current"] {
+    color: whitesmoke;
+  }
+.prof-butt{
+  width: 75%;
+
+}
