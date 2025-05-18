@@ -41,7 +41,6 @@ export const readReviewsThunk = (spotId) => async (dispatch) => {
 
     if(response.ok){
         const data = await response.json();
-        //console.log('REVIEWS', data.Reviews)
         dispatch(readReviews(data.Reviews))
         
         return data
@@ -72,15 +71,13 @@ const reviewsReducer = (state= initialState, action) => {
             return newState;
         case READ_REVIEWS:
             newState = {};
-           // console.log('PAYLOAD')
             action.payload.forEach(
               (review) => (newState[review.id] = review)
             );
             return newState;
         case DELETE_REVIEWS:
             newState = { ...state };
-            delete newState[action.payload] //was.id
-            //console.log("ACTION", action.id)
+            delete newState[action.payload]
             return newState;
         default:
             return state;

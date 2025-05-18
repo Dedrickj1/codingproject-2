@@ -45,11 +45,6 @@ const deleteSpot = (spotId) => {
     }
 }
 
-// const = () => {
-//     return{
-//         type: ,
-//     }
-// }
 
 //THUNKS
 
@@ -68,12 +63,12 @@ export const loadAllSpots = () => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${id}`,{
         method: 'GET'
     })
-    //console.log("HIIII", id)
+
     if(response.ok){
         const data = await response.json()
-         //  console.log("DATAA", data)
+        
         dispatch(readSpot(data))
-       // console.log("RESPONSE", response)
+      
         return data 
    
    
@@ -118,8 +113,7 @@ export const deleteSpotThunk = (id) => async (dispatch) => {
       method: 'DELETE'
     });
     if(response.ok){
-        //const data= await response.json();
-        // console.log(data)
+       
          dispatch(deleteSpot(id));
     }
   }; 
@@ -127,11 +121,7 @@ export const deleteSpotThunk = (id) => async (dispatch) => {
 
 
   const initialState = {}
-//  const initialState = {
-//     spots: { error: null },
-//     isLoaded: false,
-//     current: { isLoaded: false, error: null },
-//   };
+
 
 
 const spotReducer = (state = initialState, action) => {
@@ -144,11 +134,11 @@ const spotReducer = (state = initialState, action) => {
             return newState;
         case READ_SPOT:
             newState = {...state}
-            // console.log("update spot", action.spot)
+            
             newState[action.spot.id] = {...action.spot}
             return newState;
         case READ_ALL_SPOTS:
-            // console.log('HIIII', action)
+            
             spots= {}
             if(action.spots) 
                 action.spots.forEach(spot => {spots[spot.id] = spot})

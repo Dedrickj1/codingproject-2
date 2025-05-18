@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { FaHouseChimneyUser } from "react-icons/fa6";
 import * as sessionActions from '../../store/session';
 import OpenModalButton from '../OpenModalButton';
-import LoginFormModal from '../LoginFormPage';
+import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormPage';
 import '/src/index.css'
 import './ProfileButton.css'
