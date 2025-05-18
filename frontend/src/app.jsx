@@ -9,14 +9,39 @@ import UpdateSpotForm from './Pages/UpdateSpotPage';
 import SpotDetailsPage from './Pages/SpotDetailsPage/SpotDetailsPage';
 import ManageSpotsPage from './Pages/ManageSpotPage';
 
+
+// function Layout() {
+//   const dispatch = useDispatch();
+//   const [isLoaded, setIsLoaded] = useState(false);
+
+//   useEffect(() => {
+//     dispatch(sessionActions.restoreUser()).then(() => {
+//       setIsLoafded(true)
+//     });
+//   }, [dispatch]);
+
+//   return (
+//     <>
+//       <Navigation isLoaded={isLoaded} />
+//       {isLoaded && <Outlet />}
+//     </>
+//   );
+// }
+
 function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => {
-      setIsLoaded(true)
-    });
+    dispatch(sessionActions.restoreUser())
+      .then(() => {
+        console.log('✅ restoreUser resolved');
+        setIsLoaded(true);
+      })
+      .catch((err) => {
+        console.error('❌ restoreUser failed:', err);
+        setIsLoaded(true); // Still render the rest of the app
+      });
   }, [dispatch]);
 
   return (
@@ -26,6 +51,7 @@ function Layout() {
     </>
   );
 }
+
 
 const router = createBrowserRouter([
   {

@@ -11,5 +11,9 @@ export default defineConfig(({ mode }) => ({
       failOnError: mode === "production"
     })
   ],
-  
+  server: {
+    proxy:{
+      '/api' : 'http://localhost:8000'
+    }
+  }
 }));
