@@ -4,10 +4,10 @@ import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
 import CreateSpotForm from './components/CreateSpotForm';
-import LandingPage from './pages/landingPage';
-import UpdateSpotForm from './pages/UpdateSpotPage';
-import SpotDetailsPage from './pages/SpotDetailsPage/SpotDetailsPage';
-import ManageSpotsPage from './pages/ManageSpotPage';
+import LandingPage from './Pages/LandingPage';
+import UpdateSpotForm from './Pages/UpdateSpotPage';
+import SpotDetailsPage from './Pages/SpotDetailsPage/SpotDetailsPage';
+import ManageSpotsPage from './Pages/ManageSpotPage';
 
 function Layout() {
   const dispatch = useDispatch();
