@@ -67,6 +67,19 @@ app.use((_req, _res, next) => {
   next(err);
 });
 
+const path = require("path");
+
+if (isProduction) {
+  // Serve static files from frontend/dist
+  app.use(express.static(path.resolve(__dirname, "../frontend/dist")));
+
+  // Serve index.html for any unknown route
+  app.get("*", (_req, res) => {
+    res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"));
+  });
+}
+
+
 // backend/app.js
 // ...
 const { ValidationError } = require('sequelize');
