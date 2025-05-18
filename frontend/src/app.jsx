@@ -8,6 +8,8 @@ import LandingPage from './Pages/LandingPage';
 import UpdateSpotForm from './Pages/UpdateSpotPage';
 import SpotDetailsPage from './Pages/SpotDetailsPage/SpotDetailsPage';
 import ManageSpotsPage from './Pages/ManageSpotPage';
+import LoginFormModal from './components/LoginFormModal';
+import SignupFormPage from './components/SignupFormPage';
 
 
 // function Layout() {
@@ -81,6 +83,15 @@ const router = createBrowserRouter([
         path: '/reviews/current',
         element: <h1>manage reviews OPTIONAL</h1>
       },
+      {
+        path: '/login',
+        element: <LoginFormModal />
+      },
+
+      {
+        path: '/signup',
+        element: <SignupFormPage />
+      }
     ]
   }
 ]);
