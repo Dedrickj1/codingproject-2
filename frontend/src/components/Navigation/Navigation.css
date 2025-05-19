@@ -7,7 +7,7 @@
 }
 
   .profile-dropdown.hidden {
-    display: none;
+    display: flex;
   }
 
   .modal-link:hover {
