@@ -7,32 +7,31 @@ import * as sessionActions from '../../store/session';
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormPage';
-import '/src/index.css'
-import './ProfileButton.css'
-import { useNavigate/*, Link*/ } from 'react-router-dom';
+import '/src/index.css';
+import './ProfileButton.css';
+import { useNavigate } from 'react-router-dom';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const toggleMenu = (e) => {
-    e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
-    setShowMenu(!showMenu);
+    e.stopPropagation();
+    setShowMenu(prev => !prev);
   };
 
   useEffect(() => {
     if (!showMenu) return;
 
     const closeMenu = (e) => {
-      if (!ulRef.current.contains(e.target)) {
+      if (ulRef.current && !ulRef.current.contains(e.target)) {
         setShowMenu(false);
       }
     };
 
     document.addEventListener('click', closeMenu);
-
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
@@ -42,59 +41,53 @@ function ProfileButton({ user }) {
     navigate('/');
     setShowMenu(false);
   };
+
   const handleManageSpots = () => {
     navigate("/spots/current");
     setShowMenu(false);
   };
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
-
   return (
-    <>
+    <div className="profile-button-container">
       <button onClick={toggleMenu} className="menu-button">
-      <FaHouseChimneyUser />
+        <FaHouseChimneyUser />
       </button>
-      <ul className={ulClassName} ref={ulRef}>
-        {user ? (
-          <li className='login-list'>
-            <li>Hello, {user.firstName}</li>
-            {/* <li> {user.lastName}{user.username}</li> */}
-            <li>{user.email}</li>
-            {/* <li><Link to={"/spots/current"} className="manage-link">
-                Manage Spots
-              </Link>
-              </li>  */}
-<li>
-
+      {showMenu && (
+        <ul className="profile-dropdown" ref={ulRef}>
+          {user ? (
+            <>
+              <li>Hello, {user.firstName}</li>
+              <li>{user.email}</li>
+              <li>
                 <button onClick={handleManageSpots} className="manage-link-button prof-butt">
                   Manage Spots
                 </button>
-</li>
-<li>
-
-
-              <button onClick={logout} className='prof-butt'>Log Out</button>
-</li>
-
-          </li>
-        ) : (
-          <>
-            <li>
-              <OpenModalButton
-                buttonText="Log In"
-                modalComponent={<LoginFormModal />}
-              />
-            </li>
-            <li>
-              <OpenModalButton
-                buttonText="Sign Up"
-                modalComponent={<SignupFormModal />}
-              />
-            </li>
-          </>
-        )}
-      </ul>
-    </>
+              </li>
+              <li>
+                <button onClick={logout} className="prof-butt">
+                  Log Out
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <OpenModalButton
+                  buttonText="Log In"
+                  modalComponent={<LoginFormModal />}
+                />
+              </li>
+              <li>
+                <OpenModalButton
+                  buttonText="Sign Up"
+                  modalComponent={<SignupFormModal />}
+                />
+              </li>
+            </>
+          )}
+        </ul>
+      )}
+    </div>
   );
 }
 
