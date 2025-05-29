@@ -15,4 +15,24 @@
     cursor: pointer;
   }
 
-  
+  .dropdown-button {
+  background-color:   #3DC6C1;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin: 4px 0;
+  display: inline-block;
+  min-width: 100px;  
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 4px;
+  text-decoration: none; /* remove underline for NavLink */
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-button:hover {
+  background-color:   #3DC6C1;
+  text-decoration: none;
+  color: white;
+}
