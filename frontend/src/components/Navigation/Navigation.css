@@ -36,3 +36,10 @@
   text-decoration: none;
   color: white;
 }
+
+.nav-greeting {
+  margin-right: 1rem;
+  color: teal;
+  font-weight: bold;
+}
+

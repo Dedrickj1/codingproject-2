@@ -21,11 +21,12 @@ function Navigation({ isLoaded }) {
   };
 
   const sessionLinks = sessionUser ? (
-    <>
-      <li>
-        <ProfileButton user={sessionUser} />
-      </li>
-      <li>
+  <>
+    <li className="nav-greeting">Hello, {sessionUser.firstName}</li>
+    <li>
+      <ProfileButton user={sessionUser} />
+    </li>
+    <li>
         <div className="dropdown">
           <button onClick={toggleDropdown} className="dropdown-toggle">
             Menu ▼
