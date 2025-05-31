@@ -2,6 +2,7 @@ import  { useEffect, useState } from "react"; //useState,useContext, , React
 import { useDispatch, useSelector } from "react-redux";
 import { loadAllSpots } from "../../store/spots";
 import SpotCard from "../../components/SpotCard";
+import './LandingPage.css';
 
 const LandingPage = () => {
 const dispatch = useDispatch();

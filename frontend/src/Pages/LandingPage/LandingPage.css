@@ -1,0 +1,8 @@
+.spot-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  padding: 40px 60px; /* Adds top & side padding */
+  margin-top: 150px;   /* Pushes the list down from the top */
+  justify-content: center;
+}

@@ -1,11 +1,13 @@
 /* TODO: Add sitewide styles */
 body{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: #f2f1ef;
+    background-color: #D1E8E2;
     color: #253659;
     min-width: 600px;
     max-width: 1280px;
     display: grid;
+     margin-left: auto; 
+    margin-right: auto;
 }
 
 nav{
@@ -142,13 +144,13 @@ width: 300px;
 
 @media (max-width: 1024px) {
   .spot-list {
-      grid-template-columns: repeat(3, 1fr); /* 3 columns on medium screens */
+      grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 800px) {
   .spot-list {
-      grid-template-columns: repeat(2, 1fr); /* 2 columns on small screens */
+      grid-template-columns: repeat(2, 1fr); 
   }
 }
 
@@ -156,7 +158,7 @@ width: 300px;
 @media (max-width: 450px) {
   .spot-list {
     display: block;
-      /*grid-template-columns: 1fr;*/ /* 1 column on the smallest screens */
+      
   }
   .spot-card{
     justify-content: center;

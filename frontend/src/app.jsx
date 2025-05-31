@@ -80,10 +80,6 @@ const router = createBrowserRouter([
         element: <UpdateSpotForm />
       },
       {
-        path: '/reviews/current',
-        element: <h1>manage reviews OPTIONAL</h1>
-      },
-      {
         path: '/login',
         element: <LoginFormModal />
       },

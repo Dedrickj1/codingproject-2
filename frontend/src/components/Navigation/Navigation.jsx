@@ -5,6 +5,7 @@ import ProfileButton from './ProfileButton';
 import * as sessionActions from '../../store/session';
 import '/src/index.css';
 import './Navigation.css';
+import logo from '../../images/logo.png'; 
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
@@ -21,12 +22,12 @@ function Navigation({ isLoaded }) {
   };
 
   const sessionLinks = sessionUser ? (
-  <>
-    <li className="nav-greeting">Hello, {sessionUser.firstName}</li>
-    <li>
-      <ProfileButton user={sessionUser} />
-    </li>
-    <li>
+    <>
+      <li className="nav-greeting">Hello, {sessionUser.firstName}</li>
+      <li>
+        <ProfileButton user={sessionUser} />
+      </li>
+      <li>
         <div className="dropdown">
           <button onClick={toggleDropdown} className="dropdown-toggle">
             Menu ▼
@@ -56,64 +57,22 @@ function Navigation({ isLoaded }) {
   ) : (
     <>
       <li>
-        <NavLink to="/login">Log In</NavLink>
+        <NavLink to="/login" className="nav-auth-button">Log In</NavLink>
       </li>
       <li>
-        <NavLink to="/signup">Sign Up</NavLink>
+        <NavLink to="/signup" className="nav-auth-button">Sign Up</NavLink>
       </li>
     </>
   );
 
   return (
-    <ul className="nav-list">
-      {isLoaded && sessionLinks}
-    </ul>
+    <div className="nav-container">
+      <ul className="nav-list">
+        {isLoaded && sessionLinks}
+      </ul>
+      <img src={logo} alt="Dedrick's Logo" className="nav-logo" />
+    </div>
   );
 }
 
 export default Navigation;
-
-
-
-
-// function Navigation({ isLoaded }) {
-//   const sessionUser = useSelector(state => state.session.user);
-//   const dispatch = useDispatch();
-
-//   const logout = (e) => {
-//     e.preventDefault();
-//     dispatch(sessionActions.logout());
-//   };
-
-//   const sessionLinks = sessionUser ? (
-//     <>
-//       <li>
-//         <ProfileButton user={sessionUser} />
-//       </li>
-//       <li>
-//         <button onClick={logout}>Log Out</button>
-//       </li>
-//     </>
-//   ) : (
-//     <>
-//       <li>
-//         <NavLink to="/login">Log In</NavLink>
-//       </li>
-//       <li>
-//         <NavLink to="/signup">Sign Up</NavLink>
-//       </li>
-//     </>
-//   );
-
-//   return (
-//     <ul>
-//       <li>
-//         <NavLink to="/">Home</NavLink>
-//       </li>
-//       {isLoaded && sessionLinks}
-//     </ul>
-//   );
-// }
-
-// export default Navigation;
-
