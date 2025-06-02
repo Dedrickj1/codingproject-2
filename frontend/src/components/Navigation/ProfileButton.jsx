@@ -1,5 +1,5 @@
-import { FaHouseChimneyUser } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
+import logo from '../../images/logo.png'; // adjust path if needed
 import './ProfileButton.css';
 
 function ProfileButton() {
@@ -12,7 +12,7 @@ function ProfileButton() {
   return (
     <div className="profile-button-container">
       <button onClick={goHome} className="menu-button" title="Home">
-        <FaHouseChimneyUser />
+        <img src={logo} alt="Home Logo" className="profile-logo" />
       </button>
     </div>
   );

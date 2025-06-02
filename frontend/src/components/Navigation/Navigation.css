@@ -42,7 +42,7 @@
   cursor: pointer;
   font-size: 14px;
   border-radius: 4px;
-  text-decoration: none; /* remove underline for NavLink */
+  text-decoration: none; 
   transition: background-color 0.2s ease;
 }
 
@@ -67,7 +67,7 @@
   text-decoration: none;
   font-size: 0.9rem;
   transition: background-color 0.2s ease;
-  margin-right: 10px; /* Add spacing between buttons */
+  margin-right: 10px; 
 }
 
 .nav-auth-button:last-child {
@@ -94,6 +94,20 @@
 }
 
 .nav-logo {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+}
+
+.dropdown-email {
+  padding: 8px 12px;
+  font-weight: bold;
+  color: teal;
+  background: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.profile-logo {
   width: 140px;
   height: auto;
   object-fit: contain;
