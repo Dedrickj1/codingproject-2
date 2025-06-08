@@ -13,15 +13,15 @@ module.exports = {
     await ReviewImage.bulkCreate([
       {
         reviewId: 1,
-        url: 'https://cdn.pixabay.com/photo/2024/07/01/04/28/mountain-8864325_1280.jpg',
+        url: '',
       },
       {
         reviewId: 2,
-        url: 'https://cdn.pixabay.com/photo/2023/07/25/18/32/vineyard-8149655_1280.jpg',
+        url: '',
       },
       {
         reviewId: 3,
-        url: 'https://cdn.pixabay.com/photo/2024/05/14/16/48/street-8761638_1280.png',
+        url: '',
       },
     ], { validate: true })
   },
