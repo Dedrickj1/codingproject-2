@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
-import { useNavigate } from 'react-router-dom'; // ← import
+import { useNavigate } from 'react-router-dom'; 
 import * as sessionActions from '../../store/session';
 import './SignupForm.css';
 
 function SignupFormModal() {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // ← hook
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -32,7 +32,7 @@ function SignupFormModal() {
       )
         .then(() => {
           closeModal();
-          navigate('/'); // ← redirect to home
+          navigate('/');
         })
         .catch(async (res) => {
           const data = await res.json();

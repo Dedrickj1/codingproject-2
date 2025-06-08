@@ -1,8 +1,8 @@
 const express = require('express');
-const bcrypt = require('bcryptjs'); //
+const bcrypt = require('bcryptjs'); 
 
-const { check } = require('express-validator'); //
-const { handleValidationErrors } = require('../../utils/validation'); //
+const { check } = require('express-validator'); 
+const { handleValidationErrors } = require('../../utils/validation'); 
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User, ReviewImage, Booking, Review, Spot, SpotImage } = require('../../db/models');
@@ -10,7 +10,6 @@ const {Op} = require('sequelize')
 
 const router = express.Router();
 
-// Get all Current User's Bookings
 router.get('/current', requireAuth, async(req, res, next) => {
         const userId = req.user.id
         const bookings = await Booking.findAll({
@@ -53,7 +52,6 @@ router.get('/current', requireAuth, async(req, res, next) => {
     
             delete bookingJSON.Spot.SpotImages;
     
-        // Format the dates to only include the date part (YYYY-MM-DD)
         const formattedBooking = {
             id: bookingJSON.id,
             spotId: bookingJSON.spotId,
@@ -71,7 +69,6 @@ router.get('/current', requireAuth, async(req, res, next) => {
                 previewImage: bookingJSON.Spot.previewImage
             },
             userId: bookingJSON.userId,
-            // Use toISOString().split('T')[0] to get the date in YYYY-MM-DD format
             startDate: bookingJSON.startDate.toISOString().split('T')[0],
             endDate: bookingJSON.endDate.toISOString().split('T')[0],
             createdAt: bookingJSON.createdAt,
@@ -84,14 +81,13 @@ router.get('/current', requireAuth, async(req, res, next) => {
         res.status(200).json({ Bookings: bookingsList });
 })
 
-//PUT edit a booking
+
 router.put('/:bookingId', requireAuth, async (req, res)=>{
     const { bookingId } = req.params;
     const { startDate, endDate } = req.body;
     const userId = req.user.id;
 
     try {
-        // Find the booking by bookingId
         const booking = await Booking.findByPk(bookingId);
 
         if (!booking) {
@@ -110,19 +106,14 @@ router.put('/:bookingId', requireAuth, async (req, res)=>{
        
         const today = new Date();
 
-        // Ensure the booking isn't in the past
-        // if (new Date(booking.startDate) < today && new Date(booking.endDate) < today) {
-        //     return res.status(403).json({
-        //         message: "Past bookings can't be modified"
-        //     });
-        // }
+    
         if (new Date(startDate) < today && new Date(endDate) < today) {
             return res.status(403).json({
                 message: "Past bookings can't be modified"
             });
         }
 
-        // Validate the new startDate and endDate
+        
         const errors = {};
 
         if (new Date(startDate) < today) {
@@ -143,7 +134,7 @@ router.put('/:bookingId', requireAuth, async (req, res)=>{
         const conflictingBookings = await Booking.findAll({
             where: {
                 spotId: booking.spotId,
-                id: { [Op.ne]: booking.id }, // Exclude current booking
+                id: { [Op.ne]: booking.id }, 
                 [Op.or]: [
                     {
                         startDate: {
@@ -167,7 +158,7 @@ router.put('/:bookingId', requireAuth, async (req, res)=>{
 
         if (conflictingBookings.length > 0) {
             return res.status(403).json({
-                message: "Sorry, this spot is already booked for the specified dates",
+                message: "Sorry, this spot is already booked for those dates. PLease try again.",
                 errors: {
                     startDate: "Start date conflicts with an existing booking",
                     endDate: "End date conflicts with an existing booking"

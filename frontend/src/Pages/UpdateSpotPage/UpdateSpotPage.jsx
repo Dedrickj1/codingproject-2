@@ -169,27 +169,7 @@ const UpdateSpotForm = () => {
         </div>
         </div>
 
-        {/* <div>
-          <label>Lattitude</label>
-          <input
-            type="text"
-            placeholder="Latititude"
-            value={lat}
-            onChange={(e) =>setLat(e.target.value)}
-            />
-            {formErrors.lat && <p className="error">{formErrors.lat}</p>}
-        </div>
-
-        <div>
-          <label>Longitude</label>
-          <input
-            type="text"
-            placeholder="Longitude"
-            value={lat}
-            onChange={(e) =>setLng(e.target.value)}
-            />
-            {formErrors.lng && <p className="error">{formErrors.lng}</p>}
-        </div>  */}
+      
 
         <div className="form-section">
           <h2>Describe your place to guests</h2>

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import logo from '../../images/logo.png'; // adjust path if needed
+import logo from '../../images/logo.png'; 
 import './ProfileButton.css';
 
 function ProfileButton() {

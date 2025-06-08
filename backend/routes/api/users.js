@@ -11,11 +11,7 @@ const { User } = require('../../db/models');
 
 const router = express.Router();
 
-// backend/routes/api/users.js
-// ...
 
-// backend/routes/api/users.js
-// ...
 const validateSignup = [
     check('email')
       .exists({ checkFalsy: true })

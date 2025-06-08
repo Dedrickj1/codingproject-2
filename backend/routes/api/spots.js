@@ -10,66 +10,14 @@ const {Op} = require('sequelize')
 
 const router = express.Router();
 
-//GET all Spots
-// router.get('/', async (req,res, err) => {
-//     const spots = await Spot.findAll({
-//         include:[
-//         {
-//             model: Review,
-//             attributes: ['stars']
-//         },{
-//             model: SpotImage,
-//             attributes: ['url', 'preview']
-//         }
-//     ]
-//     })
 
-//     let spotsList = [];
-
-//     // Push each spot into spotsList
-//     spots.forEach((spot) => {
-//         spotsList.push(spot.toJSON());
-//     });
-
-//     const formattedSpots = spotsList.map((spot) => {
-//         // Calculate average rating
-//         let totalStars = 0;
-//         let reviewCount = 0;
-//         spot.Reviews.forEach((review) => {
-//             totalStars += review.stars;
-//             reviewCount++;
-//         });
-
-//         if (reviewCount > 0) {
-//             spot.avgRating = parseFloat((totalStars / reviewCount).toFixed(1));
-//         } else {
-//             spot.avgRating = null;
-//         }
-//         delete spot.Reviews; // Remove Reviews after processing avgRating
-
-//         // Calculate preview image
-//         spot.SpotImages.forEach((image) => {
-//             if (image.preview === true) {
-//                 spot.previewImage = image.url;
-//             }
-//         });
-//         if (!spot.previewImage) {
-//             spot.previewImage = 'No preview image available';
-//         }
-//         delete spot.SpotImages; // Remove SpotImages after processing previewImage
-
-//         return spot;
-//     })
-//     res.json({ Spots: formattedSpots }); 
-// })
-
-// GET all spots filtered with query parameters
+// GET all spots filtered with query 
 router.get('/', async (req, res) => {
     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
-    // Convert query parameters to proper types
-    page = parseInt(page) || 1;  // Default to 1 if invalid or not provided
-    size = parseInt(size) || 20;  // Default to 20 if invalid or not provided
+  
+    page = parseInt(page) || 1;  
+    size = parseInt(size) || 20;  
     minLat = minLat !== undefined ? parseFloat(minLat) : undefined;
     maxLat = maxLat !== undefined ? parseFloat(maxLat) : undefined;
     minLng = minLng !== undefined ? parseFloat(minLng) : undefined;
@@ -77,7 +25,7 @@ router.get('/', async (req, res) => {
     minPrice = minPrice !== undefined ? parseFloat(minPrice) : undefined;
     maxPrice = maxPrice !== undefined ? parseFloat(maxPrice) : undefined
 
-    // Validation
+    
     const errors = {};
     if (isNaN(page) || page < 1) errors.page = "Page must be greater than or equal to 1";
     if (isNaN(size) || size < 1 || size > 20) errors.size = "Size must be between 1 and 20";
@@ -88,7 +36,7 @@ router.get('/', async (req, res) => {
     if (minPrice !== undefined && (isNaN(minPrice) || minPrice < 0)) errors.minPrice = "Minimum price must be greater than or equal to 0";
     if (maxPrice !== undefined && (isNaN(maxPrice) || maxPrice < 0)) errors.maxPrice = "Maximum price must be greater than or equal to 0";
 
-    // If there are errors, respond with a 400 status
+   
     if (Object.keys(errors).length > 0) {
         return res.status(400).json({
             message: "Bad Request",
@@ -119,9 +67,9 @@ router.get('/', async (req, res) => {
 
     let spotsList = spots.map(spot => spot.toJSON());
 
-    // Process each spot to include avgRating and previewImage
+    
     spotsList.forEach(spot => {
-        // Calculate average rating
+       
         let totalStars = 0;
         let reviewCount = 0;
         spot.Reviews.forEach(review => {
@@ -134,9 +82,9 @@ router.get('/', async (req, res) => {
         } else {
             spot.avgRating = null;
         }
-        delete spot.Reviews; // Remove Reviews after processing avgRating
+        delete spot.Reviews; 
 
-        // Calculate preview image
+        
         spot.SpotImages.forEach(image => {
             if (image.preview === true) {
                 spot.previewImage = image.url;
@@ -145,7 +93,7 @@ router.get('/', async (req, res) => {
         if (!spot.previewImage) {
             spot.previewImage = 'No preview image available';
         }
-        delete spot.SpotImages; // Remove SpotImages after processing previewImage
+        delete spot.SpotImages; 
 
         return spot;
     });
@@ -155,7 +103,7 @@ router.get('/', async (req, res) => {
 
 
 
-//GET all SPots owned by the Current User
+
 router.get('/current', requireAuth, async (req, res) => {
     const userId = req.user.id;
     const spots = await Spot.findAll({
@@ -226,7 +174,7 @@ router.get('/current', requireAuth, async (req, res) => {
 
 })
 
-//POST Create a Spot
+
 router.post('/', requireAuth, async (req, res, next) =>{
     try {
         const { address, city, state, country, lat, lng, name, description, price } = req.body;
@@ -355,13 +303,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) =>{
 
     try{
         const spot = await Spot.findByPk(spotId)
-        // const spot = await Spot.findOne({
-        //     where: {
-        //         id: spotId,
-        //         ownerId: userId
-        //     }
-        // })
-
+       
         if(!spot){
             return res.status(404).json({message: "Spot couldn't be found"})
         }
@@ -602,16 +544,7 @@ router.post('/:spotId/bookings', requireAuth, async (req,res)=>{
             });
         }
 
-        // // Check if startDate or endDate are valid
-        // const errors = {};
-        // const today = new Date();
-
-        // if (new Date(startDate) < today) {
-        //     errors.startDate = "startDate cannot be in the past";
-        // }
-        // if (new Date(endDate) <= new Date(startDate)) {
-        //     errors.endDate = "endDate cannot be on or before startDate";
-        // }
+        
      // Parse the dates from the request and today
      const today = new Date();
      const todayDateOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());

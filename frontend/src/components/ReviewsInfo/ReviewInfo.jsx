@@ -13,13 +13,11 @@ const ReviewInfo = ({ spotDetails , currUser, spotId }) => {
         ownerId, 
         avgStarRating,
         numReviews,
-      } = spotDetails //Owner, SpotImages,city,  country, description,name,  price, state
+      } = spotDetails 
     
     const [noReviews, setNoReviews] = useState(false);
     const reviews = Object.values(useSelector((state) => state.reviews))
-    // const spotReviews = Object.values(useSelector((state) => state.reviews)).filter(
-    //     (review) => review.spotId === spotId
-    // );
+  
     const userReviews = reviews.filter(
         (reviews) => reviews.userId === currUser?.id
       );  

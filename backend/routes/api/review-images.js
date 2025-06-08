@@ -10,36 +10,35 @@ const {Op} = require('sequelize')
 
 const router = express.Router();
 
-// DELETE a Review Image
+
 router.delete('/:imageId', requireAuth, async (req, res) => {
     const { imageId } = req.params;
     const userId = req.user.id;
 
     try {
-        // Find the review image by imageId
+
         const reviewImage = await ReviewImage.findOne({
             where: { id: imageId },
             include: {
                 model: Review,
-                attributes: ['userId'] // Include review user information
+                attributes: ['userId'] 
             }
         });
 
-        // If the review image is not found, return a 404 error
+        
         if (!reviewImage) {
             return res.status(404).json({
                 message: "Review Image couldn't be found"
             });
         }
 
-        // Ensure the user owns the review
+
         if (reviewImage.Review.userId !== userId) {
             return res.status(403).json({
                 message: 'Forbidden: You do not have permission to delete this image'
             });
         }
 
-        // Delete the review image
         await reviewImage.destroy();
 
         res.status(200).json({

@@ -4,13 +4,8 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+    
     static associate(models) {
-      // define association here
       Spot.belongsTo(models.User, {
         foreignKey: 'ownerId',
         as: 'Owner'
@@ -94,11 +89,11 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         min: {
             args: -180,
-            msg: 'Longitude must be within -180 and 180'
+            msg: 'Longitude must be between -180 and 180'
         },
         max: {
             args: 180,
-            msg: 'Longitude must be within -180 and 180'
+            msg: 'Longitude must be between -180 and 180'
         }
     }
     },

@@ -9,17 +9,8 @@ const dispatch = useDispatch();
 const spots = Object.values(useSelector((state)=> state.spots))
 const [isLoaded, setIsLoaded] = useState(false);
 
-// useEffect(() => {
-//     if(Object.keys(spots).length === 0)
-//         console.log('dispatch')
-//         dispatch(loadAllSpots())
-    
-// },[dispatch])
-
-
 useEffect(() => {
     if (!isLoaded) {
-      //console.log("Dispatching loadAllSpots");
       dispatch(loadAllSpots()) 
         setIsLoaded(true); 
     }

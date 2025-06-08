@@ -1,4 +1,4 @@
-//import React from "react"
+
 import { FaStar } from "react-icons/fa";
 import "./SpotInfo.css";
 
@@ -7,7 +7,7 @@ const {
     Owner, SpotImages,
     avgStarRating, city, country, description,
     name, numReviews, price,
-    state} = spotDetails // ownerId,
+    state} = spotDetails 
 
 
     const handleClick = () => {
@@ -28,7 +28,7 @@ const {
               key={image.id}
               src={image.url}
               className={index === 0 ? 'large-image' : 'small-image'} 
-              //  className={`preview-${image.preview}`}
+            
             />
           ))}
         </div>
@@ -47,7 +47,7 @@ const {
                 <p className="callout-rating">
                   <FaStar />
                   {avgStarRating
-                    ? avgStarRating.toFixed(1) // ? Math.round(avgStarRating * 100) / 100
+                    ? avgStarRating.toFixed(1)
                     : "New"}{" "}
                   {numReviews ? "・" + numReviews : ""}{" "}
                   {numReviews === 0 ? "" : numReviews > 1 ? "reviews" : "review"}

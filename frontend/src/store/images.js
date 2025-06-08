@@ -53,10 +53,7 @@ const spotImageReducer = (state = initialState, action) => {
                 newState = { ...state };
                 newState[action.payload.id] = action.payload;
                 return newState;
-            // case UPDATE_SPOT_IMAGE:
-            //     newstate = ;
-
-            //     return newstate;
+           
             case DELETE_SPOT_IMAGE:
                 newState = { ...state };
                 delete newState[action.imageId];

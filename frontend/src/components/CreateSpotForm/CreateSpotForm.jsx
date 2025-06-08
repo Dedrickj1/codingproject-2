@@ -41,12 +41,7 @@ const CreateSpotForm = ()=> {
       if(!imageUrl2 || !/\.jpg|\.jpeg|\.png$/i.test(imageUrl2)) errors.imageUrl2 = 'Image URL must end in .png .jpg or .jpeg'
       if(!imageUrl3 || !/\.jpg|\.jpeg|\.png$/i.test(imageUrl3)) errors.imageUrl3 = 'Image URL must end in .png .jpg or .jpeg'
       if(!imageUrl4 || !/\.jpg|\.jpeg|\.png$/i.test(imageUrl4)) errors.imageUrl4 = 'Image URL must end in .png .jpg or .jpeg'
-      // if (lat && (lat > 90 || lat < -90)) {
-      //   errors.lat = "Latitude must be within -90 and 90";
-      // }
-      // if (lng && (lng > 180 || lat < -180)) {
-      //   errors.lng = "Longitude must be within -180 and 180";
-      // }
+     
      setFormErrors(errors)}
   }, [hasSubmitted, country, address, city, state, description, name, price, previewImage, imageUrl1, imageUrl2, imageUrl3, imageUrl4 ]) //lat, lng
 
@@ -66,15 +61,7 @@ const CreateSpotForm = ()=> {
       description,
       price
     }
-    // console.log(spotData)
-    // dispatch(createSpotThunk(spotData))
-    // if(previewImage !== ""){
-    //   await dispatch(createSpotThunk(spotData)).then((newSpot) => {
-    //     navigate(`/spots/${newSpot.id}`)
-    //   })
-    // }
-
-
+   
       if(previewImage !==""){
         dispatch(createSpotThunk(spotData))
       .then((data) =>{

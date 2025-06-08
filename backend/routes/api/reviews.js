@@ -10,11 +10,11 @@ const {Op} = require('sequelize')
 
 const router = express.Router();
 
-//GET all reviews of the current User
+
 router.get('/current', requireAuth, async (req,res)=>{
     const userId = req.user.id;
 
-    // Fetch all reviews written by the current user
+
     const reviews = await Review.findAll({
         where: { userId: userId },
         include: [
@@ -44,19 +44,19 @@ router.get('/current', requireAuth, async (req,res)=>{
     reviews.forEach((review) => {
         const reviewJSON = review.toJSON();
 
-        // Handle preview image logic for the Spot
+    
         reviewJSON.Spot.SpotImages.forEach((image) => {
             if (image.preview === true) {
                 reviewJSON.Spot.previewImage = image.url;
             }
         });
 
-        // If no preview image was found, set default message
+  
         if (!reviewJSON.Spot.previewImage) {
             reviewJSON.Spot.previewImage = 'No preview image available';
         }
 
-        // Remove SpotImages array from response
+
         delete reviewJSON.Spot.SpotImages;
 
         reviewsList.push({
@@ -97,26 +97,26 @@ router.get('/current', requireAuth, async (req,res)=>{
     res.status(200).json({ Reviews: reviewsList });
 })
 
-//POST create and return a new image for a review specified by  reviews id
+
 router.post('/:reviewId/images', requireAuth, async (req,res)=> {
     const { reviewId } = req.params;
     const { url } = req.body;
     const userId = req.user.id;
 
     try {
-        // Find the review by reviewId and check if it belongs to the current user
+      
         const review = await Review.findByPk(reviewId);
 
-        // If the review doesn't exist
+      
         if (!review) {
             return res.status(404).json({ message: "Review couldn't be found" });
         }
-        // check if the current user is the owner of the review
+       
         if (review.userId !== userId) {
             return res.status(403).json({ message: "Forbidden: You do not have permission to add images to this review" });
         }
 
-        // Check if the review already has 10 images
+       
         const imageCount = await ReviewImage.count({ where: { reviewId } });
 
         if (imageCount >= 10) {
@@ -125,13 +125,13 @@ router.post('/:reviewId/images', requireAuth, async (req,res)=> {
             });
         }
 
-        // Create a new review image
+       
         const newImage = await ReviewImage.create({
             reviewId: review.id,
             url
         });
 
-        // Return the newly created image
+      
         const formattedImage = {
             id: newImage.id,
             url: newImage.url
@@ -149,14 +149,13 @@ router.post('/:reviewId/images', requireAuth, async (req,res)=> {
 })
 
 
-//PUT update and return an existing review
 router.put('/:reviewId', requireAuth, async (req,res)=>{
     const { reviewId } = req.params;
     const { review, stars } = req.body;
     const userId = req.user.id;
 
     try {
-        // Validate the new review and stars
+      
         const errors = {};
         if (!review || review.trim() === "") {
             errors.review = "Review text is required";
@@ -172,7 +171,7 @@ router.put('/:reviewId', requireAuth, async (req,res)=>{
             });
         }
 
-        // Find the review by reviewId
+      
         const existingReview = await Review.findByPk(reviewId);
 
         if (!existingReview) {
@@ -181,7 +180,7 @@ router.put('/:reviewId', requireAuth, async (req,res)=>{
             });
         }
 
-        // Ensure the review belongs to the current user
+    
         if (existingReview.userId !== userId) {
             return res.status(403).json({
                 message: 'Forbidden: You do not have permission to edit this review'

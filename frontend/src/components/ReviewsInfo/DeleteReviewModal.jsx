@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from '../../context/Modal';
-//import './DeleteReviewModal.css'
 import * as reviewActions from '../../store/reviews';
 import * as spotActions from '../../store/spots';
 
@@ -9,8 +8,6 @@ const DeleteReviewModal = ({ reviewId, spotId}) => {
     const dispatch = useDispatch()
     const { closeModal } = useModal();
     const currSpotId = useSelector((state) => state.spots.id)
-
-    //console.log("ID", currSpotId)
 
 
     const handleClickDelete = async (e) => {

@@ -1,6 +1,5 @@
 import {useState} from "react";
 import { useNavigate } from 'react-router-dom';
-//import { useModal } from '../../context/Modal';
 import OpenModalButton from '../OpenModalButton'
 import ManageSpotDeleteModal from "./ManageSpotDeleteModal";
 import { FaStar } from "react-icons/fa";
@@ -21,13 +20,6 @@ const ManageSpotCard = ({spot}) => {
           const handleModalClick = (e) => {
             e.stopPropagation();
         };
-
-        // const closeMenu = (e) => {
-        //     if (!ulRef.current.contains(e.target)) {
-        //       setShowMenu(false);
-        //     }
-        //   };
-        //console.log(`Spot ID: ${spot.id}, Avg Rating: ${spot.avgRating}`);
 
         return (
             <div
@@ -67,9 +59,7 @@ const ManageSpotCard = ({spot}) => {
                 </div>
                 <div onClick={handleModalClick}>
                     <OpenModalButton
-                      buttonText="Delete"
-                    //   onClick={handleModalClick}
-                    //   onButtonClick={closeMenu}
+                    
                       modalComponent={<ManageSpotDeleteModal spotId={spot.id} />}
                     />
                 </div>

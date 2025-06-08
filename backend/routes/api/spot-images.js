@@ -25,7 +25,7 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
             }
         });
 
-        // If the spot image is not found, return a 404 error
+        // If spot image is not found, return a 404 error
         if (!spotImage) {
             return res.status(404).json({
                 message: "Spot Image couldn't be found"

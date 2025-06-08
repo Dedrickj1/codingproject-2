@@ -8,7 +8,6 @@ const ManageSpotsPage = ()=>{
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const currUserId = useSelector((state) => state.session.user.id)
-    //const {userId} = useParams()
     const spots = useSelector((state) => state.spots);
     const mySpots = Object.values(spots).filter((spot) => spot.ownerId === currUserId);
     const [isLoaded, setIsLoaded] = useState(false);
