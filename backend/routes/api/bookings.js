@@ -96,7 +96,7 @@ router.put('/:bookingId', requireAuth, async (req, res)=>{
             });
         }
 
-        // Ensure the booking belongs to the current user
+        // Make sure the booking was made by the current user
         if (booking.userId !== userId) {
             return res.status(403).json({
                 message: 'Forbidden: You do not have permission to edit this booking'
@@ -130,7 +130,7 @@ router.put('/:bookingId', requireAuth, async (req, res)=>{
             });
         }
 
-        // Check for booking conflicts
+        // Check for bookings errors
         const conflictingBookings = await Booking.findAll({
             where: {
                 spotId: booking.spotId,
@@ -166,13 +166,13 @@ router.put('/:bookingId', requireAuth, async (req, res)=>{
             });
         }
 
-        // Update the booking
+        // This is where you can update the booking
         await booking.update({
             startDate,
             endDate
         });
 
-        // Format the dates before sending the response
+        // Make sure the dates are formatted correctly before sending request
         const updatedBooking = booking.toJSON();
         updatedBooking.startDate = updatedBooking.startDate.toISOString().split('T')[0];
         updatedBooking.endDate = updatedBooking.endDate.toISOString().split('T')[0];
@@ -187,7 +187,7 @@ router.put('/:bookingId', requireAuth, async (req, res)=>{
     }
 })
 
-// DELETE a Booking
+// This will delete the bookings
 router.delete('/:bookingId', requireAuth, async (req, res) => {
     const { bookingId } = req.params;
     const userId = req.user.id;

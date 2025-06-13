@@ -16,22 +16,22 @@ module.exports = {
       {
         spotId: 1,
         userId: 1,
-        startDate: '2024-09-14',
-        endDate: '2024-11-11',
+        startDate: '2023-12-25',
+        endDate: '2024-01-01',
      
       },
       {
         spotId: 2,
         userId: 2,
-        startDate: '2026-02-02',
-        endDate: '2026-02-12',
+        startDate: '2020-10-23',
+        endDate: '2020-10-30',
        
       },
       {
         spotId: 3,
         userId: 3,
-        startDate: '2024-03-03',
-        endDate: '2024-03-13',
+        startDate: '2028-04-12',
+        endDate: '2028-04-13',
        
       },
     ], { validate: true });

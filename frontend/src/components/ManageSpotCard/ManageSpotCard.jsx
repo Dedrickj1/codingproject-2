@@ -59,7 +59,7 @@ const ManageSpotCard = ({spot}) => {
                 </div>
                 <div onClick={handleModalClick}>
                     <OpenModalButton
-                    
+                     buttonText="Delete"
                       modalComponent={<ManageSpotDeleteModal spotId={spot.id} />}
                     />
                 </div>

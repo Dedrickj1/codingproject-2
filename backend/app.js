@@ -7,8 +7,7 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 
 const { environment } = require('./config');
-//CHECKING LINE OF CODE BELOW
-//console.log('NODE_ENV:', process.env.NODE_ENV);
+
 const isProduction = environment === 'production';
 
 const app = express();
@@ -18,20 +17,19 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
 
-// Security Middleware
+
 if (!isProduction) {
-    // enable cors only in development
+   
     app.use(cors());
   }
 
-  // helmet helps set a variety of headers to better secure your app
   app.use(
     helmet.crossOriginResourcePolicy({
       policy: "cross-origin"
     })
   );
 
-  // Set the _csrf token and create req.csrfToken method
+  
   app.use(
     csurf({
       cookie: {
@@ -51,14 +49,9 @@ const routes = require('./routes');
 
 
 
-app.use(routes); // Connect all the routes
+app.use(routes); 
 
-// backend/app.js
-// ...
 
-// backend/app.js
-// ...
-// Catch unhandled requests and forward to error handler.
 app.use((_req, _res, next) => {
   const err = new Error("The requested resource couldn't be found.");
   err.title = "Resource Not Found";
@@ -70,25 +63,22 @@ app.use((_req, _res, next) => {
 const path = require("path");
 
 if (isProduction) {
-  // Serve static files from frontend/dist
+  
   app.use(express.static(path.resolve(__dirname, "../frontend/dist")));
 
-  // Serve index.html for any unknown route
+  
   app.get("*", (_req, res) => {
     res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"));
   });
 }
 
 
-// backend/app.js
-// ...
+
 const { ValidationError } = require('sequelize');
 
-// ...
 
-// Process sequelize errors
 app.use((err, _req, _res, next) => {
-  // check if error is a Sequelize error:
+ 
   if (err instanceof ValidationError) {
     let errors = {};
     for (let error of err.errors) {
@@ -100,34 +90,20 @@ app.use((err, _req, _res, next) => {
   next(err);
 });
 
-// backend/app.js
-// ...
-// Error formatter
-// app.use((err, _req, res, _next) => {
-//   res.status(err.status || 500);
-//   console.error(err);
-//   res.json({
-//     title: err.title || 'Server Error',
-//     message: err.message,
-//     errors: err.errors,
-//     stack: isProduction ? null : err.stack
-//   });
-// });
 
-//rewrite to get rid of the stack when deployed to render
 app.use((err, _req, res, _next) => {
   res.status(err.status || 500);
   console.error(err);
 
   if (isProduction) {
-    // In production, exclude stack from the response
+    
     res.json({
-      //title: err.title || 'Server Error',
+      
       message: err.message,
       errors: err.errors,
     });
   } else {
-    // In development, include stack in the response
+    
     res.json({
       title: err.title || 'Server Error',
       message: err.message,

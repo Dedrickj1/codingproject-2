@@ -12,24 +12,6 @@ import LoginFormModal from './components/LoginFormModal';
 import SignupFormPage from './components/SignupFormPage';
 
 
-// function Layout() {
-//   const dispatch = useDispatch();
-//   const [isLoaded, setIsLoaded] = useState(false);
-
-//   useEffect(() => {
-//     dispatch(sessionActions.restoreUser()).then(() => {
-//       setIsLoafded(true)
-//     });
-//   }, [dispatch]);
-
-//   return (
-//     <>
-//       <Navigation isLoaded={isLoaded} />
-//       {isLoaded && <Outlet />}
-//     </>
-//   );
-// }
-
 function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -37,12 +19,12 @@ function Layout() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser())
       .then(() => {
-        console.log('✅ restoreUser resolved');
+        console.log('restoreUser resolved');
         setIsLoaded(true);
       })
       .catch((err) => {
-        console.error('❌ restoreUser failed:', err);
-        setIsLoaded(true); // Still render the rest of the app
+        console.error(' restoreUser failed:', err);
+        setIsLoaded(true); 
       });
   }, [dispatch]);
 

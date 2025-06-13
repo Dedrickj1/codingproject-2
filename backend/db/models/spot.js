@@ -102,8 +102,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         len: {
-            args: [1, 50],
-            msg: 'Name must be less than 50 characters'
+            args: [1, 40],
+            msg: 'Name must be less than 40 characters'
         }
     }
     },
@@ -111,7 +111,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
-        notEmpty: { msg: 'Description is required' }
+        notEmpty: { msg: 'Please Provide Descriptiom' }
     }
     },
     price: {
@@ -119,11 +119,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         isNumeric: {
-            msg: 'Price per day must be a number'
+            msg: 'Price must be numbers'
         },
         min: {
             args: [0],
-            msg: 'Price per day must be a positive number'
+            msg: 'Please enter a price greater than zero'
         }
     }
   }

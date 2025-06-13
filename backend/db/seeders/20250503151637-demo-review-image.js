@@ -13,15 +13,15 @@ module.exports = {
     await ReviewImage.bulkCreate([
       {
         reviewId: 1,
-        url: '',
+        url: 'https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg',
       },
       {
         reviewId: 2,
-        url: '',
+        url: 'https://images.pexels.com/photos/11107306/pexels-photo-11107306.jpeg',
       },
       {
         reviewId: 3,
-        url: '',
+        url: 'https://images.pexels.com/photos/14036446/pexels-photo-14036446.jpeg',
       },
     ], { validate: true })
   },
