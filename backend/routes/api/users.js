@@ -1,7 +1,5 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-// backend/routes/api/users.js
-// ...
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
