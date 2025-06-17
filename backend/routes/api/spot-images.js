@@ -10,7 +10,7 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
   const { imageId } = req.params;
 
   try {
-    // Find the SpotImage and include associated Spot to verify ownership
+    // Find the SpotImage to verify ownership
     const imageToDelete = await SpotImage.findOne({
       where: { id: imageId },
       include: {
@@ -19,27 +19,27 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
       }
     });
 
-    // If no image is found, return 404
+    // return 404 if no image is found
     if (!imageToDelete) {
       return res.status(404).json({
         message: "Spot Image couldn't be found"
       });
     }
 
-    // If current user doesn't own the spot, forbid deletion
+    // If current user doesn't own the spot, give forbidden message
     if (imageToDelete.Spot.ownerId !== userId) {
       return res.status(403).json({
         message: 'Forbidden: You do not have permission to delete this image'
       });
     }
 
-    // Delete the image
+    // Deletes the image
     await imageToDelete.destroy();
 
     return res.status(200).json({ message: 'Successfully deleted' });
 
   } catch (err) {
-    // Handle unexpected errors
+    // This handles unexpected errors
     return res.status(500).json({
       message: 'Internal Server Error',
       error: err.message

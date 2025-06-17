@@ -17,7 +17,7 @@ const deleteReviews = (payload) => ({
     payload
 })
 
-//THUNKS
+
 export const createReviewsThunk = (spotId, payload) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: "POST",

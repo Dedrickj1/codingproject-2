@@ -19,7 +19,7 @@ function SpotInfo({ spotDetails }) {
     alert("Feature Coming Soon...");
   };
 
-  // Sort images so preview images come first
+  
   const sortedImages = [...images].sort((imgA, imgB) => imgB.preview - imgA.preview);
 
   return (

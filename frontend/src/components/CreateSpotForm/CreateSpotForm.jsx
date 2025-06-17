@@ -157,35 +157,15 @@ const CreateSpotForm = ()=> {
         </div>
         </div>
 
-        {/* <div>
-          <label>Lattitude</label>
-          <input
-            type="text"
-            placeholder="Latititude"
-            value={lat}
-            onChange={(e) =>setLat(e.target.value)}
-            />
-            {formErrors.lat && <p className="error">{formErrors.lat}</p>}
-        </div>
 
-        <div>
-          <label>Longitude</label>
-          <input
-            type="text"
-            placeholder="Longitude"
-            value={lat}
-            onChange={(e) =>setLng(e.target.value)}
-            />
-            {formErrors.lng && <p className="error">{formErrors.lng}</p>}
-        </div>  */}
 
         <div className="form-section">
-          <h2>Describe your place to guests</h2>
-          <p>Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood.</p>
+          <h2>Describe your place.</h2>
+          <p>Please include all features that make your place stand out.</p>
           <div className="form-group">
             <label>Description</label>
             <textarea
-              placeholder="Please write at least 30 characters"
+              placeholder="Aleast 30 characters"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
@@ -194,8 +174,8 @@ const CreateSpotForm = ()=> {
         </div>
 
         <div className="form-section">
-          <h2>Create a title for your spot</h2>
-          <p>Catch guests attention with a spot title that highlights what makes your place special.</p>
+          <h2>Title</h2>
+          <p>Create a unique title that will catch visitors eye.</p>
           <div className="form-group">
             <label>Name</label>
             <input
@@ -209,8 +189,8 @@ const CreateSpotForm = ()=> {
         </div>
 
         <div className="form-section">
-          <h2>Set a base price for your spot</h2>
-          <p>Competitive pricing can help your listing stand out and rank higher in search results.</p>
+          <h2>Starting price</h2>
+          <p>A good Price will help get more eyes for your place.</p>
           <div className="form-group">
             <label>Price per night (USD)</label>
             <div className="price"> <span>$</span>
@@ -226,8 +206,8 @@ const CreateSpotForm = ()=> {
         </div>
 
         <div className="form-section">
-          <h2>Liven up your spot with photos</h2>
-          <p>Submit a link to at least one photo to publish your spot.</p>
+          <h2>Include Photos</h2>
+          <p>Provide a valid link to your place.</p>
           <div className="form-group">
 
             <input
@@ -287,7 +267,6 @@ const CreateSpotForm = ()=> {
         </div>
 
         <button type="submit" onClick={e => handleSubmit(e)}>Create Spot</button>
-        {/* {formErrors && <p>{formErrors}</p>} */}
       </form>
     </div>
   )

@@ -1,7 +1,7 @@
 import { csrfFetch } from './csrf';
 
 const ADD_SPOT_IMAGE = "spots/createSpotImage"
-//const UPDATE_SPOT_IMAGE = "spots/updateSpotImage"
+
 const DELETE_SPOT_IMAGE = "spots/deleteSpotImage"
 
 
@@ -10,10 +10,7 @@ const createSpotImage = (payload) => ({
     payload,
   });
 
-// const updateSpotImage = (payload) => ({
-//     type: UPDATE_SPOT_IMAGE,
-//     payload
-// })
+
 const deleteSpotImage = (imageId) => ({
     type: DELETE_SPOT_IMAGE,
     imageId,

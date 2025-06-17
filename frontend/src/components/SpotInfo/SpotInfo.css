@@ -58,26 +58,26 @@
     grid-row: 2;
 }
 
-/* Wrapper to hold both the details and the callout containers side by side */
+
 .details-callout-wrapper {
     display: flex;
-    justify-content: space-between; /* Ensures the containers are side by side */
-    gap: 20px; /* Adds space between the containers */
+    justify-content: space-between; 
+    gap: 20px; 
     margin-bottom: 20px;
     border-bottom: 2px solid #253659;
     padding-bottom: 20px;
   
 }
 
-/* Details container on the left */
+
 .details-container {
-    flex: 2; /* Takes up 2/3 width */
+    flex: 2; 
     padding-right: 20px;
 }
 
-/* Callout container on the right */
+
 .callout-container {
-    flex: 1; /* Takes up 1/3 width */
+    flex: 1; 
     padding: 20px;
     border: 2px solid gray;
     border-radius: 16px;

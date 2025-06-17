@@ -1,6 +1,6 @@
 import { csrfFetch } from './csrf';
 
-//Action types
+
 const CREATE_SPOT = "spots/createSpot"
 const READ_SPOT = "spots/readSpot"
 const READ_ALL_SPOTS = "spots/readAllSpots"
@@ -8,7 +8,7 @@ const UPDATE_SPOT = "spots/updateSpot"
 const DELETE_SPOT = "spots/deleteSpot"
 
 
-//Action Creators
+
 const createSpot = (newSpot) => {
     return{
         type: CREATE_SPOT,
@@ -46,7 +46,7 @@ const deleteSpot = (spotId) => {
 }
 
 
-//THUNKS
+
 
 export const loadAllSpots = () => async (dispatch) => {
     const response = await csrfFetch('/api/spots', {

@@ -6,7 +6,7 @@
   .spot-image {
     width: 100%;
     height: 150px;
-    /* object-fit: cover; */
+    
     position: relative;
     border-radius: 8px;
     align-self: center;
@@ -14,11 +14,11 @@
   }
 
   .spot-image:hover {
-    transform: scale(1.05); /* Add zoom effect on hover */
+    transform: scale(1.05); 
   }
 
   .image-wrapper:hover .tooltip {
-    opacity: 1; /* Show tooltip on hover */
+    opacity: 1; 
   }
 
   .tooltip {
