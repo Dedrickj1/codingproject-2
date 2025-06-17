@@ -33,15 +33,15 @@ const handleSequelizeError = (error, res) => {
     const validationErrors = {};
     error.errors.forEach(err => {
         switch (err.path) {
-            case 'address': validationErrors.address = "Street address is required"; break;
-            case 'city': validationErrors.city = "City is required"; break;
-            case 'state': validationErrors.state = "State is required"; break;
-            case 'country': validationErrors.country = "Country is required"; break;
-            case 'lat': validationErrors.lat = "Latitude must be within -90 and 90"; break;
-            case 'lng': validationErrors.lng = "Longitude must be within -180 and 180"; break;
-            case 'name': validationErrors.name = "Name must be less than 50 characters"; break;
-            case 'description': validationErrors.description = "Description is required"; break;
-            case 'price': validationErrors.price = "Price per day must be a positive number"; break;
+            case 'address': validationErrors.address = "Street address is required";
+            case 'city': validationErrors.city = "City is required"; 
+            case 'state': validationErrors.state = "State is required"; 
+            case 'country': validationErrors.country = "Country is required"; 
+            case 'lat': validationErrors.lat = "Latitude must be within -90 and 90"; 
+            case 'lng': validationErrors.lng = "Longitude must be within -180 and 180"; 
+            case 'name': validationErrors.name = "Name must be less than 50 characters"; 
+            case 'description': validationErrors.description = "Description is required"; 
+            case 'price': validationErrors.price = "Price per day must be a positive number"; 
         }
     });
 
